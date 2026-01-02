@@ -1,4 +1,4 @@
-#!/user/bin/env groovy
+#!/usr/bin/env groovy
 package com.example
 
 class Docker implements Serializable {
@@ -9,12 +9,22 @@ class Docker implements Serializable {
         this.script = script
     }
 
-    def buildDockerImage (String imageName) {
-        script.echo "building the docker image..."
-        script.withCredentials([script.usernamePassword(credentialsId: 'docker-hub-repo', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
-            script.sh "docker build -t $imageName ."
-            script.sh "echo '${script.PASS}' | docker login -u '${script.USER}' --password-stdin"
-            script.sh "docker push $imageName"
+    def buildDockerImage(String imageName) {
+        script.echo "Building the Docker image: ${imageName}..."
+
+        script.withCredentials([script.usernamePassword(
+            credentialsId: 'docker-hub-repo', 
+            passwordVariable: 'PASS', 
+            usernameVariable: 'USER'
+        )]) {
+            // Docker build
+            script.sh "docker build -t ${imageName} ."
+
+            // Docker login securely
+            script.sh "echo \$PASS | docker login -u \$USER --password-stdin"
+
+            // Docker push
+            script.sh "docker push ${imageName}"
         }
     }
 }
