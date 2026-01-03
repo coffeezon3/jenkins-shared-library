@@ -1,0 +1,234 @@
+Started by user anni
+Connecting to https://api.github.com using coffezon3/******
+Obtained Jenkinsfile from d7f7b33b600955a1aedf99af7270e366cd7ca779
+[Pipeline] Start of Pipeline
+[Pipeline] library
+Loading library jenkins-shared-library@master
+Attempting to resolve master from remote references...
+ > git --version # timeout=10
+ > git --version # 'git version 2.47.3'
+using GIT_ASKPASS to set credentials 
+ > git ls-remote -- https://github.com/coffeezon3/jenkins-shared-library.git # timeout=10
+Found match: refs/heads/master revision 96d32e51595b9623bd75de3488a3b2fc644054a2
+The recommended git tool is: NONE
+using credential github-jenkins-token
+ > git rev-parse --resolve-git-dir /var/jenkins_home/workspace/maven-app_jenkins-shared-library@libs/ef6f7147085c13e281950babe339b753651e6be2be80c9bb078c4cedc0c5ab2f/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/coffeezon3/jenkins-shared-library.git # timeout=10
+Fetching without tags
+Fetching upstream changes from https://github.com/coffeezon3/jenkins-shared-library.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.47.3'
+using GIT_ASKPASS to set credentials 
+ > git fetch --no-tags --force --progress -- https://github.com/coffeezon3/jenkins-shared-library.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+Checking out Revision 96d32e51595b9623bd75de3488a3b2fc644054a2 (master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 96d32e51595b9623bd75de3488a3b2fc644054a2 # timeout=10
+Commit message: "Add files via upload"
+ > git rev-list --no-walk 232e2eed8f45e1373f5de7c2ad845af85ec48d33 # timeout=10
+[Pipeline] node
+Running on Jenkins in /var/jenkins_home/workspace/maven-app_jenkins-shared-library
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+The recommended git tool is: git
+using credential github-jenkins-token
+ > git rev-parse --resolve-git-dir /var/jenkins_home/workspace/maven-app_jenkins-shared-library/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/coffeezon3/java-maven-app-ci.git # timeout=10
+Fetching without tags
+Fetching upstream changes from https://github.com/coffeezon3/java-maven-app-ci.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.47.3'
+using GIT_ASKPASS to set credentials 
+ > git fetch --no-tags --force --progress -- https://github.com/coffeezon3/java-maven-app-ci.git +refs/heads/jenkins-shared-library:refs/remotes/origin/jenkins-shared-library # timeout=10
+Checking out Revision d7f7b33b600955a1aedf99af7270e366cd7ca779 (jenkins-shared-library)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f d7f7b33b600955a1aedf99af7270e366cd7ca779 # timeout=10
+Commit message: "Update Jenkinsfile"
+ > git rev-list --no-walk ccdd7b55524b496a96d3a76cef938861f843a605 # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Tool Install)
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (init)
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] script
+[Pipeline] {
+[Pipeline] load
+[Pipeline] { (script.groovy)
+[Pipeline] }
+[Pipeline] // load
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (build jar)
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] script
+[Pipeline] {
+[Pipeline] sh
++ docker build -t null .
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 187B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/amazoncorretto:8-alpine3.17-jre
+#2 ...
+
+#3 [auth] library/amazoncorretto:pull token for registry-1.docker.io
+#3 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/amazoncorretto:8-alpine3.17-jre
+#2 DONE 0.8s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [1/3] FROM docker.io/library/amazoncorretto:8-alpine3.17-jre@sha256:3dbdce03fbe921966033eca64c4f75c949bbe85785ed243e99ed4a335d784bda
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 81B done
+#6 DONE 0.0s
+
+#7 [2/3] COPY ./target/java-maven-app-*.jar /usr/app/
+#7 CACHED
+
+#8 [3/3] WORKDIR /usr/app
+#8 CACHED
+
+#9 exporting to image
+#9 exporting layers done
+#9 writing image sha256:d798b0937a1a72f33754c30e34b8749aebc40f6c19e024d0e8249477fda0ca2d done
+#9 naming to docker.io/library/null done
+#9 DONE 0.0s
+
+ [33m1 warning found (use docker --debug to expand):
+[0m - JSONArgsRecommended: JSON arguments recommended for CMD to prevent unintended behavior related to OS signals (line 8)
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (build and push image)
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] script
+[Pipeline] {
+[Pipeline] sh
++ docker build -t asdhka/annirep:jma-3.0 .
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 187B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/amazoncorretto:8-alpine3.17-jre
+#2 DONE 0.2s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [1/3] FROM docker.io/library/amazoncorretto:8-alpine3.17-jre@sha256:3dbdce03fbe921966033eca64c4f75c949bbe85785ed243e99ed4a335d784bda
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 81B done
+#5 DONE 0.0s
+
+#6 [2/3] COPY ./target/java-maven-app-*.jar /usr/app/
+#6 CACHED
+
+#7 [3/3] WORKDIR /usr/app
+#7 CACHED
+
+#8 exporting to image
+#8 exporting layers done
+#8 writing image sha256:d798b0937a1a72f33754c30e34b8749aebc40f6c19e024d0e8249477fda0ca2d done
+#8 naming to docker.io/asdhka/annirep:jma-3.0 done
+#8 DONE 0.0s
+
+ [33m1 warning found (use docker --debug to expand):
+[0m - JSONArgsRecommended: JSON arguments recommended for CMD to prevent unintended behavior related to OS signals (line 8)
+[Pipeline] withCredentials
+Masking supported pattern matches of $PASS
+[Pipeline] {
+[Pipeline] sh
++ docker login -u asdhka --password-stdin
++ echo ****
+Login Succeeded
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] sh
++ docker push asdhka/annirep:jma-3.0
+The push refers to repository [docker.io/asdhka/annirep]
+5f70bf18a086: Preparing
+66eebc8de60c: Preparing
+432a00a9effe: Preparing
+8d78b2117a5b: Preparing
+432a00a9effe: Layer already exists
+66eebc8de60c: Layer already exists
+8d78b2117a5b: Layer already exists
+5f70bf18a086: Layer already exists
+jma-3.0: digest: sha256:2699a48eecf282318ce6585fd4a5464e16b921c30c8176c747283bb27f198a73 size: 1158
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (deploy)
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] script
+[Pipeline] {
+[Pipeline] echo
+deploying the application...
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+
+GitHub has been notified of this commit’s build result
+
+Finished: SUCCESS
